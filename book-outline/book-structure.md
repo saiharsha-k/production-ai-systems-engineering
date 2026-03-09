@@ -28,15 +28,19 @@ The focus is not on model architectures, but on the **systems engineering requir
 
 Infrastructure is the foundation on which AI workloads run.
 
-Topics include:
+| Section | Topic                                  | System Layer   | Core Problem                                                                                                                          | Key Concepts                                                                                      | Depth          |
+| ------- | -------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------- |
+| 2.1     | Compute Foundations for AI Workloads   | Infrastructure | AI workloads have different compute requirements than traditional software, especially with GPU acceleration and large memory demands | GPU vs CPU inference, accelerator architectures, memory constraints, batch vs real-time workloads | Conceptual     |
+| 2.2     | Containerization for AI Systems        | Infrastructure | AI models and dependencies must run consistently across development, staging, and production environments                             | Docker, container images, dependency isolation, reproducible environments                         | Implementation |
+| 2.3     | Kubernetes for AI Workloads            | Infrastructure | Managing distributed AI services requires orchestration for scheduling, scaling, and reliability                                      | Kubernetes architecture, pods, deployments, GPU scheduling, cluster resource management           | Systems        |
+| 2.4     | Model Serving Infrastructure           | Infrastructure | Deploying models for inference requires specialized serving infrastructure to handle latency, throughput, and scaling                 | inference servers, REST/gRPC endpoints, model serving frameworks, deployment pipelines            | Implementation |
+| 2.5     | Inference Runtimes and Acceleration    | Infrastructure | Efficient inference requires optimized runtimes and hardware acceleration to reduce latency and cost                                  | vLLM, TensorRT, ONNX Runtime, GPU kernels, KV caching                                             | Systems        |
+| 2.6     | Autoscaling AI Services                | Infrastructure | AI workloads have highly variable demand and must scale dynamically without overprovisioning expensive resources                      | horizontal scaling, autoscaling policies, load balancing, queue-based scaling                     | Systems        |
+| 2.7     | Networking for AI Systems              | Infrastructure | Distributed AI architectures require efficient communication between services, databases, and model endpoints                         | service networking, load balancing, API gateways, service mesh                                    | Systems        |
+| 2.8     | Observability Infrastructure           | Infrastructure | Engineers must monitor AI systems across multiple services and components to diagnose failures and maintain reliability               | logging pipelines, metrics, distributed tracing, OpenTelemetry, monitoring dashboards             | Systems        |
+| 2.9     | Reliability and Deployment Strategies  | Infrastructure | AI systems must be deployed safely without disrupting production workloads                                                            | blue-green deployment, canary releases, rollback mechanisms, health checks                        | Systems        |
+| 2.10    | Cost Engineering for AI Infrastructure | Infrastructure | AI workloads can become extremely expensive without careful resource management and optimization                                      | cost monitoring, GPU utilization, batch processing, model size tradeoffs                          | Systems        |
 
-1. Compute for AI Workloads (GPU vs CPU inference)
-2. Containerization and Model Serving
-3. Kubernetes for AI Systems
-4. Inference Runtimes (vLLM, Ray Serve, TensorRT)
-5. Autoscaling AI Services
-6. Observability Infrastructure for AI Systems
-7. Cost Management for AI Infrastructure
 
 ---
 
@@ -44,15 +48,19 @@ Topics include:
 
 The data layer powers model training, retrieval systems, and continuous learning.
 
-Topics include:
+| Section | Topic                                | System Layer | Core Problem                                                                                               | Key Concepts                                                                       | Depth          |
+| ------- | ------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | -------------- |
+| 3.1     | The Role of Data in AI Systems       | Data Layer   | AI systems depend on continuous data pipelines rather than static datasets                                 | data pipelines, data lifecycle, structured vs unstructured data, data dependencies | Conceptual     |
+| 3.2     | Data Ingestion Architectures         | Data Layer   | AI systems require reliable ingestion pipelines to collect and process data from multiple sources          | batch ingestion, streaming pipelines, CDC, ingestion reliability                   | Systems        |
+| 3.3     | Streaming Data Pipelines             | Data Layer   | Real-time AI systems depend on streaming architectures to process events and updates continuously          | Kafka, event streams, message queues, stream processing                            | Systems        |
+| 3.4     | Document Processing Pipelines        | Data Layer   | Unstructured data must be transformed into structured formats suitable for retrieval and model consumption | document parsing, text extraction, preprocessing pipelines                         | Implementation |
+| 3.5     | Chunking and Content Structuring     | Data Layer   | Large documents must be split into meaningful units for retrieval and context assembly                     | chunking strategies, structural segmentation, semantic chunking                    | Implementation |
+| 3.6     | Embedding Generation Pipelines       | Data Layer   | Text and other data must be converted into vector representations for semantic retrieval                   | embedding models, embedding pipelines, vector generation workflows                 | Systems        |
+| 3.7     | Vector Databases and Indexing        | Data Layer   | Efficient semantic retrieval requires specialized indexing structures capable of scaling to large datasets | ANN indexing, HNSW, IVF, vector databases, index maintenance                       | Systems        |
+| 3.8     | Hybrid Search Architectures          | Data Layer   | Combining semantic retrieval with lexical search improves robustness and precision in production systems   | BM25, dense retrieval, hybrid retrieval strategies                                 | Systems        |
+| 3.9     | Metadata and Governance Systems      | Data Layer   | AI systems must track data lineage, access control, and metadata to ensure reliability and compliance      | metadata schemas, ACLs, lineage tracking, governance frameworks                    | Systems        |
+| 3.10    | Data Freshness and Knowledge Updates | Data Layer   | AI systems must continuously update knowledge sources without breaking retrieval pipelines                 | index refresh strategies, incremental ingestion, data versioning                   | Systems        |
 
-1. Data Ingestion Architectures
-2. Streaming Data Pipelines
-3. Document Processing Pipelines for AI Systems
-4. Feature Stores and Feature Engineering
-5. Vector Databases and Embedding Storage
-6. Hybrid Search Architectures
-7. Metadata and Governance Systems
 
 ---
 
@@ -60,16 +68,19 @@ Topics include:
 
 This layer contains models and reasoning systems that transform data into intelligence.
 
-Topics include:
+| Section | Topic                                       | System Layer       | Core Problem                                                                                                                     | Key Concepts                                                             | Depth          |
+| ------- | ------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------- |
+| 4.1     | The Role of Models in Production AI Systems | Intelligence Layer | Models are often treated as the center of AI systems, but in production they are only one component within a larger architecture | model capabilities, model limitations, model vs system boundaries        | Conceptual     |
+| 4.2     | Model Lifecycle Management                  | Intelligence Layer | Models must be versioned, evaluated, and promoted safely from experimentation into production systems                            | model registries, versioning, deployment pipelines, rollback strategies  | Systems        |
+| 4.3     | Retrieval-Augmented Generation Architecture | Intelligence Layer | Large language models require external knowledge retrieval to provide accurate and up-to-date responses                          | RAG pipeline structure, retrieval → context assembly → generation        | Systems        |
+| 4.4     | Retrieval Systems                           | Intelligence Layer | Effective RAG systems depend on reliable retrieval mechanisms that balance recall, precision, and latency                        | dense retrieval, sparse retrieval, hybrid search, ANN indexes            | Systems        |
+| 4.5     | Query Understanding and Rewriting           | Intelligence Layer | User queries often need transformation before retrieval to improve recall and retrieval accuracy                                 | query expansion, query rewriting, intent detection                       | Implementation |
+| 4.6     | Context Assembly Pipelines                  | Intelligence Layer | Retrieved information must be organized and compressed before passing it to models within context limits                         | chunk selection, context compression, deduplication, prompt structuring  | Systems        |
+| 4.7     | Reranking and Relevance Optimization        | Intelligence Layer | Initial retrieval often returns noisy results that must be reordered for higher answer accuracy                                  | cross-encoders, reranking models, ranking pipelines                      | Implementation |
+| 4.8     | Guardrails and Safety Mechanisms            | Intelligence Layer | AI systems must prevent hallucinations, unsafe outputs, and prompt injection attacks                                             | prompt injection defense, citation enforcement, refusal mechanisms       | Systems        |
+| 4.9     | Evaluation Frameworks for AI Systems        | Intelligence Layer | AI outputs must be measured and evaluated using systematic metrics beyond simple accuracy                                        | retrieval metrics, answer evaluation, groundedness, evaluation pipelines | Systems        |
+| 4.10    | Failure Modes in AI Systems                 | Intelligence Layer | AI systems exhibit unique failure patterns that must be understood and mitigated                                                 | hallucination causes, retrieval failure, context errors, evaluation gaps | Systems        |
 
-1. Model Lifecycle Management
-2. Retrieval-Augmented Generation (RAG) Architecture
-3. Retrieval Systems (Dense, Sparse, Hybrid)
-4. Context Assembly and Prompt Construction
-5. Reranking Systems
-6. Guardrails and Safety Systems
-7. Evaluation Frameworks for AI Systems
-8. Failure Modes in RAG Systems
 
 ---
 
@@ -77,15 +88,19 @@ Topics include:
 
 This layer turns AI capabilities into reliable services.
 
-Topics include:
+| Section | Topic                                 | System Layer        | Core Problem                                                                                                                                | Key Concepts                                                     | Depth          |
+| ------- | ------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------- |
+| 5.1     | The Service Layer in AI Systems       | Service / API Layer | AI models and pipelines must be exposed through stable service interfaces that applications can reliably consume                            | service abstraction, API contracts, system boundaries            | Conceptual     |
+| 5.2     | API Design for AI Services            | Service / API Layer | AI services must expose consistent and predictable interfaces despite underlying model variability                                          | REST/gRPC APIs, request schemas, response structures, versioning | Implementation |
+| 5.3     | LLM Gateway Architecture              | Service / API Layer | Organizations must manage multiple models and providers through centralized gateways that handle routing, authentication, and observability | AI gateways, provider abstraction, centralized routing           | Systems        |
+| 5.4     | Model Routing Strategies              | Service / API Layer | Different models offer varying cost, latency, and capability tradeoffs that require intelligent routing decisions                           | rule-based routing, cost-aware routing, latency-aware routing    | Systems        |
+| 5.5     | Caching Strategies for AI Systems     | Service / API Layer | AI requests can be expensive and slow without caching mechanisms to reuse results and intermediate artifacts                                | response caching, embedding caching, KV-cache reuse              | Systems        |
+| 5.6     | Prompt Management Systems             | Service / API Layer | Prompts evolve over time and must be managed as versioned artifacts within production systems                                               | prompt templates, version control, prompt experiments            | Implementation |
+| 5.7     | Observability for AI Requests         | Service / API Layer | Engineers must trace and monitor AI requests across multiple services and components                                                        | request tracing, token tracking, latency monitoring              | Systems        |
+| 5.8     | Rate Limiting and Resource Protection | Service / API Layer | AI services must prevent overload and abuse while maintaining quality of service for legitimate users                                       | rate limiting, quotas, request prioritization                    | Systems        |
+| 5.9     | Cost Control and Token Management     | Service / API Layer | AI usage costs can escalate rapidly without careful budgeting and monitoring of token usage                                                 | token accounting, cost dashboards, budget enforcement            | Systems        |
+| 5.10    | Security and Data Protection          | Service / API Layer | AI systems must prevent sensitive data leakage and unauthorized access across model interactions                                            | authentication, authorization, data redaction, secure routing    | Systems        |
 
-1. API Gateways for AI Systems
-2. LLM Gateway Architecture
-3. Model Routing Strategies
-4. Caching Strategies for AI Systems
-5. Prompt Management Systems
-6. Observability and Tracing for AI Systems
-7. Cost Control and Token Management
 
 ---
 
@@ -93,14 +108,34 @@ Topics include:
 
 The application layer integrates AI into real products and workflows.
 
-Topics include:
+| Section | Topic                                  | System Layer      | Core Problem                                                                                                                     | Key Concepts                                                          | Depth          |
+| ------- | -------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------- |
+| 6.1     | The Role of Applications in AI Systems | Application Layer | AI systems only become valuable when integrated into real products and workflows                                                 | AI product architecture, system boundaries, application orchestration | Conceptual     |
+| 6.2     | AI Application Architecture            | Application Layer | AI applications must coordinate user interaction, backend services, and AI capabilities within reliable system architectures     | frontend-backend architecture, AI service integration, request flows  | Systems        |
+| 6.3     | Conversational AI Systems              | Application Layer | Many AI applications rely on conversational interfaces that require session handling, context management, and interaction design | chat interfaces, session memory, conversation management              | Implementation |
+| 6.4     | AI Copilot Architectures               | Application Layer | Copilot-style systems assist users within existing workflows rather than replacing them                                          | contextual assistance, embedded AI features, workflow augmentation    | Systems        |
+| 6.5     | Agent-Based Systems                    | Application Layer | Some AI applications require autonomous task execution using tools and multi-step reasoning                                      | tool use, agent loops, planning vs reactive agents                    | Systems        |
+| 6.6     | Human-in-the-Loop AI Systems           | Application Layer | Many real-world AI systems require human oversight to ensure reliability and accountability                                      | human review workflows, approval systems, assisted decision-making    | Systems        |
+| 6.7     | UX Design for AI Applications          | Application Layer | AI outputs are probabilistic and require specialized UX patterns to maintain user trust and usability                            | explainability, citations, error handling, streaming responses        | Implementation |
+| 6.8     | Feedback Collection and Learning Loops | Application Layer | AI systems must continuously collect feedback to improve performance and adapt to changing conditions                            | user feedback pipelines, annotation workflows, learning loops         | Systems        |
+| 6.9     | Reliability and Fallback Strategies    | Application Layer | AI systems must handle uncertainty and failure gracefully within user-facing applications                                        | fallback responses, degraded modes, escalation to humans              | Systems        |
+| 6.10    | Product Evolution in AI Systems        | Application Layer | AI products evolve through experimentation and iterative improvement rather than static deployments                              | A/B testing, prompt experiments, feature rollouts                     | Systems        |
 
-1. AI Copilot Architectures
-2. Conversational AI Systems
-3. Agent-Based Systems and Tool Use
-4. Human-in-the-Loop AI Systems
-5. UX Design for AI Applications
-6. Feedback Loops and Continuous Improvement
+---
+
+# Part VII — Operating and Evolving AI Systems
+
+| Section | Topic                                  | System Layer | Core Problem                                                                                              | Key Concepts                                                       | Depth      |
+| ------- | -------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| 7.1     | Operating Production AI Systems        | Cross-layer  | AI systems require continuous monitoring and operational management after deployment                      | operational workflows, incident response, system health            | Systems    |
+| 7.2     | Continuous Evaluation and Monitoring   | Cross-layer  | AI outputs degrade over time without continuous evaluation and monitoring                                 | evaluation pipelines, drift detection, quality monitoring          | Systems    |
+| 7.3     | Updating Knowledge and Models          | Cross-layer  | AI systems must evolve as data, knowledge, and user needs change                                          | model updates, index refresh pipelines, retraining loops           | Systems    |
+| 7.4     | Reliability Engineering for AI Systems | Cross-layer  | AI systems require resilience strategies similar to distributed systems but with probabilistic components | redundancy, fallback systems, graceful degradation                 | Systems    |
+| 7.5     | Security and Governance in AI Systems  | Cross-layer  | AI systems introduce new security and governance risks that must be actively managed                      | prompt injection defense, access control, data governance          | Systems    |
+| 7.6     | Cost Engineering for AI Systems        | Cross-layer  | AI workloads can become financially unsustainable without careful cost optimization                       | token budgeting, inference optimization, caching strategies        | Systems    |
+| 7.7     | Scaling AI Systems                     | Cross-layer  | AI systems must scale with growing data, traffic, and complexity                                          | scaling architectures, distributed retrieval, system partitioning  | Systems    |
+| 7.8     | The Future of Production AI Systems    | Cross-layer  | AI system architectures continue to evolve as models, hardware, and software ecosystems change            | agent systems, edge AI, specialized models, emerging architectures | Conceptual |
+
 
 ---
 
